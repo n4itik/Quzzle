@@ -4,6 +4,7 @@ import Confetti from "react-confetti";
 import Question from "./Question";
 
 export default function App() {
+  // State variables initialization
   const [on, setOn] = useState(false);
   const [questions, setQuestions] = useState([]);
   const [count, setCount] = useState(0);
@@ -11,6 +12,7 @@ export default function App() {
   const [correct, setCorrect] = useState(0);
   const [allCorrect, setAllCorrect] = useState(false);
 
+  // Shuffle array elements
   const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1));
@@ -19,6 +21,7 @@ export default function App() {
     return array;
   };
 
+  // Fetch questions from the API
   useEffect(() => {
     async function fetchQuestions() {
       const response = await fetch(
@@ -44,7 +47,9 @@ export default function App() {
     fetchQuestions();
   }, [count]);
 
+  // Handle checking the answers
   function handleCheck() {
+    // Check if all questions are answered
     let selected = true;
     questions.forEach((question) => {
       if (question.selected === null) {
@@ -55,12 +60,16 @@ export default function App() {
     if (!selected) {
       return;
     }
+
+    // Mark questions as checked
     setQuestions((questions) =>
       questions.map((question) => {
         return { ...question, checked: true };
       })
     );
     setChecked(true);
+
+    // Count correct answers
     let correct = 0;
     questions.forEach((question) => {
       if (question.correctAnswer === question.selected) {
@@ -73,6 +82,7 @@ export default function App() {
     setCorrect(correct);
   }
 
+  // Handle clicking on an answer
   function handleAnswerClick(id, answer) {
     setQuestions((questions) =>
       questions.map((question) => {
@@ -83,12 +93,14 @@ export default function App() {
     );
   }
 
+  // Reset the quiz
   function handlePlayAgain() {
     setCount((count) => count + 1);
     setChecked(false);
     setAllCorrect(false);
   }
 
+  // Map questions to the Question component
   const quiz = questions
     ? questions.map((question) => {
         return (
@@ -102,10 +114,12 @@ export default function App() {
       })
     : [];
 
+  // Start the quiz
   function startQuiz() {
     setOn((prevOn) => !prevOn);
   }
 
+  // Render components based on the state
   return (
     <>
       {allCorrect && (

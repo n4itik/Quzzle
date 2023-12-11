@@ -27,6 +27,8 @@ body {
   background-size: 60%;
 }
 
+/* START SCREEN */
+
 .start-screen,
 .quiz-container {
   display: flex;
@@ -71,6 +73,8 @@ body {
   background-color: var(--accent-hover);
 }
 
+/* QUIZ SCREEN */
+
 .quiz-container {
   max-width: max(60%, 600px);
   padding: 0 2em;
@@ -86,6 +90,8 @@ body {
   font-size: 1.25rem;
   font-weight: 700;
 }
+
+/* Answers */
 
 .answer {
   font-family: inherit;
@@ -126,6 +132,8 @@ body {
   opacity: 0.3;
 }
 
+/* Results */
+
 .result {
   display: flex;
   justify-content: center;
@@ -154,6 +162,8 @@ body {
   height: 100%;
   z-index: 5;
 }
+
+/* MEDIA QUERIES */
 
 @media (max-width: 500px) {
   body {

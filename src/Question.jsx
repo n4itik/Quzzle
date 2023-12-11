@@ -6,12 +6,15 @@ export default function Question(props) {
   let answers = props.question.answers;
 
   function handleClick(answer) {
+    // Prevent further action if the answer is already checked
     if (props.question.checked) {
       return;
     }
+    // Handle the clicked answer
     props.handleAnswerClick(props.id, answer);
   }
 
+  // Map answer options to buttons
   const options = answers.map((answer) => {
     let type = null;
     if (props.question.checked) {
@@ -23,6 +26,8 @@ export default function Question(props) {
         type = "non-selected";
       }
     }
+
+    // Render answer button
     return (
       <button
         key={nanoid()}
@@ -37,6 +42,7 @@ export default function Question(props) {
     );
   });
 
+  // Render the question and its options
   return (
     <div className="question-container">
       <p className="question">{decode(props.question.question)}</p>
@@ -45,6 +51,7 @@ export default function Question(props) {
   );
 }
 
+// Prop types definition
 Question.propTypes = {
   question: PropTypes.shape({
     question: PropTypes.string,
